@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 import requests
 import base64
+from flask_cors import CORS 
 
 app = Flask(__name__)
+CORS(app)
 
 # URL del modelo de Hugging Face (Stable Diffusion)
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2"
