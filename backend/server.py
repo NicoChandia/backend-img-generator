@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify
 import requests, base64
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)  # habilita CORS para todas las rutas
 
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2"
-API_TOKEN = "TU_TOKEN_DE_HUGGINGFACE"
+API_TOKEN = os.environ.get("HF_TOKEN")
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
 @app.route("/generar", methods=["POST"])
