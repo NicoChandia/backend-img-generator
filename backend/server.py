@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "https://nicochandia.github.io"}}) # habilita CORS para todas las rutas
 
-API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2"
+API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
 API_TOKEN = os.environ.get("HF_TOKEN")
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
