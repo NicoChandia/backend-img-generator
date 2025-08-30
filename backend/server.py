@@ -14,12 +14,20 @@ headers = {"Authorization": f"Bearer {API_TOKEN}"}
 def generar():
     datos = request.get_json()
     prompt = datos.get("prompt")
-    response = requests.post(API_URL, headers=headers, json={"inputs": prompt})
-    if response.status_code != 200:
+    if not prompt:
+        return jsonify({"error": "Prompt vacío"}), 400
+
+    try:
+        response = requests.post(API_URL, headers=headers, json={"inputs": prompt})
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print("Error Hugging Face:", e, response.text if 'response' in locals() else "")
         return jsonify({"error": "No se pudo generar la imagen"}), 500
+
     image_bytes = response.content
     image_base64 = base64.b64encode(image_bytes).decode("utf-8")
     return jsonify({"imagen": f"data:image/png;base64,{image_base64}"})
+
 
 @app.route("/", methods=["GET"])
 def home():
@@ -27,3 +35,4 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
