@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "https://nicochandia.github.io"}})
 
 # Configuración de la API de Hugging Face
-API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
+API_URL = "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-base-1.0"
 API_TOKEN = os.environ.get("HF_TOKEN") # Se obtiene la clave desde las variables de entorno de Render
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
